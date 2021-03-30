@@ -21,12 +21,12 @@ commandTests:
   - name: "Check GCC version"
     command: "gcc"
     args: ["--version"]
-    expectedOutput: ["Red Hat 7.3.1-5"]
+    expectedOutput: ["Red Hat 4.8.5-44"]
 
   - name: "Check G++ version"
     command: "g++"
     args: ["--version"]
-    expectedOutput: ["Red Hat 7.3.1-5"]
+    expectedOutput: ["Red Hat 4.8.5-44"]
 
 fileExistenceTests:
   - name: 'Check nonroot user home'

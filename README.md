@@ -6,7 +6,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/citihub/centos-devel.svg)](https://hub.docker.com/r/citihub/centos-devel/)
 
 <p align="center">
-  <a href="https://azure.microsoft.com"><img width="200" src="https://github.com/citihub/centos-devel/raw/master/resources/citihub-logo.png"></a>
+  <a href="https://azure.microsoft.com"><img width="200" src="https://github.com/citihub/centos-devel/raw/master/resources/citihub_logo.png"></a>
 </p>
 
 # Citihub Development Docker image

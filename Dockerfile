@@ -18,6 +18,7 @@ ARG GLIBC_VERSION
 ARG JDK_VERSION
 ARG SCALA_VERSION
 ARG SBT_VERSION
+
 USER 0
 
 # Tools
@@ -45,12 +46,11 @@ RUN yum -y install java-11-openjdk-devel-${JDK_VERSION} \
     java-11-openjdk-devel-${JDK_VERSION}.i686 \
     && yum clean all
 
-# Scala
-RUN wget https://downloads.lightbend.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.rpm \
-    && yum -y install scala-${SCALA_VERSION}.rpm \
-    && rm scala-${SCALA_VERSION}.rpm \
+# Scala & sbt
+RUN curl -o scala-${SCALA_VERSION}.rpm https://downloads.lightbend.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.rpm \
     && curl https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo \
-    && yum -y install sbt-${SBT_VERSION} \
+    && yum -y install scala-${SCALA_VERSION}.rpm sbt-${SBT_VERSION} \
+    && rm scala-${SCALA_VERSION}.rpm \
     && yum clean all
 
 USER 1001

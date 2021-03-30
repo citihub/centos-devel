@@ -4,7 +4,9 @@ ARG GIT_VERSION=2.30.1-1.ep7
 ARG RHEL_ENDPOINT_VERSION=1.9-1
 ARG GCC_VERSION=4.8.5-44.el7
 ARG GLIBC_VERSION=2.17-323.el7_9
-ARG JDK_VERSION=11.0.10.0.9-1.el7_9 
+ARG JDK_VERSION=11.0.10.0.9-1.el7_9
+ARG SCALA_VERSION=2.13.5
+ARG SBT_VERSION=1.4.9-0
 
 # Download Terraform binary
 #FROM centos/devtoolset-7-toolchain-centos7:${CENTOS_VERSION} as base
@@ -14,6 +16,8 @@ ARG RHEL_ENDPOINT_VERSION
 ARG GCC_VERSION
 ARG GLIBC_VERSION
 ARG JDK_VERSION
+ARG SCALA_VERSION
+ARG SBT_VERSION
 USER 0
 
 # Tools
@@ -39,9 +43,11 @@ RUN yum -y install java-11-openjdk-devel-${JDK_VERSION} \
     java-11-openjdk-devel-${JDK_VERSION}.i686
 
 # Scala
-RUN wget https://downloads.lightbend.com/scala/2.13.5/scala-2.13.5.rpm \
-    && yum -y install scala-2.13.5.rpm \
-    && rm scala-2.13.5.rpm
+RUN wget https://downloads.lightbend.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.rpm \
+    && yum -y install scala-${SCALA_VERSION}.rpm \
+    && rm scala-${SCALA_VERSION}.rpm \
+    && curl https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo \
+    && yum -y install sbt-${SBT_VERSION}
 
 # Clean up
 RUN yum clean all

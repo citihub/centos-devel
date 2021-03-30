@@ -5,9 +5,9 @@ ARG GIT_VERSION=2.30.1-1.ep7
 # Download Terraform binary
 FROM centos/devtoolset-7-toolchain-centos7:${CENTOS_VERSION} as base
 ARG GIT_VERSION
-RUN yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm \
-    && yum -y install git-${GIT_VERSION} \
-    && yum clean all
+RUN sudo yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm \
+    && sudo yum -y install git-${GIT_VERSION} \
+    && sudo yum clean all
 
 # Build final image
 LABEL maintainer="support@citihub.com"

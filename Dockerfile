@@ -13,10 +13,10 @@ ARG RHEL_ENDPOINT_VERSION
 ARG GCC_VERSION
 ARG GLIBC_VERSION
 USER 0
-RUN yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-${RHEL_ENDPOINT_VERSION}.x86_64.rpm
-RUN yum -y install git-${GIT_VERSION}
-RUN yum -y group install "Development Tools"
-RUN yum -y install libgcc-${GCC_VERSION} \
+RUN yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-${RHEL_ENDPOINT_VERSION}.x86_64.rpm \
+    && yum -y install git-${GIT_VERSION} \
+    && yum -y group install "Development Tools" \
+    && yum -y install libgcc-${GCC_VERSION} \
     libgcc-c++-${GCC_VERSION}   \
     glibc-devel-${GLIBC_VERSION} \
     libstdc++-devel-${GCC_VERSION} \

@@ -10,6 +10,7 @@ ARG RHEL_ENDPOINT_VERSION
 USER 0
 RUN yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-${RHEL_ENDPOINT_VERSION}.x86_64.rpm \
     && yum -y install git-${GIT_VERSION} \
+    && yum -y install libgcc.i686 libgcc-c++.i686 glibc-devel.i686 libstdc++-devel.i686 --setopt=protected_multilib=false \
     && yum clean all
 USER 1001
 

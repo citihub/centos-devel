@@ -23,7 +23,8 @@ USER 0
 # Tools
 RUN yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-${RHEL_ENDPOINT_VERSION}.x86_64.rpm \
     && yum -y install git-${GIT_VERSION} \
-    && yum -y install wget-1.14-18.el7_6.1
+    && yum -y install wget-1.14-18.el7_6.1 \
+    && yum clean all
 
 # C/C++ 64bit & 32bit
 RUN yum -y group install "Development Tools" \
@@ -36,21 +37,21 @@ RUN yum -y group install "Development Tools" \
     libgcc-c++-${GCC_VERSION}.i686   \
     glibc-devel-${GLIBC_VERSION}.i686 \
     libstdc++-devel-${GCC_VERSION}.i686 \
-    --setopt=protected_multilib=false
+    --setopt=protected_multilib=false \
+    && yum clean all
 
 # Java 64bit & 32bit
 RUN yum -y install java-11-openjdk-devel-${JDK_VERSION} \
-    java-11-openjdk-devel-${JDK_VERSION}.i686
+    java-11-openjdk-devel-${JDK_VERSION}.i686 \
+    && yum clean all
 
 # Scala
 RUN wget https://downloads.lightbend.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.rpm \
     && yum -y install scala-${SCALA_VERSION}.rpm \
     && rm scala-${SCALA_VERSION}.rpm \
     && curl https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo \
-    && yum -y install sbt-${SBT_VERSION}
-
-# Clean up
-RUN yum clean all
+    && yum -y install sbt-${SBT_VERSION} \
+    && yum clean all
 
 USER 1001
 

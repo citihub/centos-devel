@@ -1,0 +1,35 @@
+schemaVersion: "2.0.0"
+
+metadataTest:
+  labels:
+    - key: "maintainer"
+      value: "support@citihub.com"
+  cmd: ["bash"]
+  workdir: "/workspace"
+
+commandTests:
+  - name: "Check Python version"
+    command: "python"
+    args: ["--version"]
+    expectedOutput: ["Python 2.7.5"]
+
+  - name: "Check Git version"
+    command: "git"
+    args: ["--version"]
+    expectedOutput: ["git version 1.8.3.1"]
+
+fileExistenceTests:
+  - name: 'Check nonroot user home'
+    path: '/home/nonroot'
+    shouldExist: true
+    permissions: 'drwxr-xr-x'
+    uid: 1001
+    gid: 1001
+    isExecutableBy: 'group'
+  - name: 'Check nonroot user rights on /workspace folder'
+    path: '/workspace'
+    shouldExist: true
+    permissions: 'drwxr-xr-x'
+    uid: 1001
+    gid: 1001
+    isExecutableBy: 'group'

@@ -14,10 +14,15 @@ ARG GLIBC_VERSION
 USER 0
 RUN yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-${RHEL_ENDPOINT_VERSION}.x86_64.rpm \
     && yum -y install git-${GIT_VERSION} \
-    && yum -y install libgcc.i686-${GCC_VERSION} \
-    libgcc-c++.i686-${GCC_VERSION}   \
-    glibc-devel.i686-${GLIBC_VERSION} \
-    libstdc++-devel.i686-${GCC_VERSION} \
+    && yum -y install libgcc-${GCC_VERSION} \
+    libgcc-c++-${GCC_VERSION}   \
+    glibc-devel-${GLIBC_VERSION} \
+    libstdc++-devel-${GCC_VERSION} \
+    --setopt=protected_multilib=false \
+    && yum -y install libgcc-${GCC_VERSION}.i686 \
+    libgcc-c++-${GCC_VERSION}.i686   \
+    glibc-devel-${GLIBC_VERSION}.i686 \
+    libstdc++-devel-${GCC_VERSION}.i686 \
     --setopt=protected_multilib=false \
     && yum clean all
 USER 1001
@@ -31,7 +36,9 @@ USER 0
 RUN groupadd --gid 5001 nonroot \
   # user needs a home folder to store azure credentials
   && useradd --gid nonroot --create-home --uid 5001 nonroot \
-  && chown nonroot:nonroot /workspace
+  && chown nonroot:nonroot /workspace \
+  && chmod 755 /home/nonroot \
+  && chmod 755 /workspace
 USER nonroot
 
 CMD ["bash"]

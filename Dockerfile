@@ -2,6 +2,8 @@
 ARG CENTOS_VERSION=latest
 ARG GIT_VERSION=2.30.1-1.ep7
 ARG RHEL_ENDPOINT_VERSION=1.9-1
+ARG GCC_VERSION=4.8.5-44.el7
+ARG GLIBC_VERSION=2.17-323.el7_9
 
 # Download Terraform binary
 FROM centos/devtoolset-7-toolchain-centos7:${CENTOS_VERSION} as base
@@ -10,7 +12,11 @@ ARG RHEL_ENDPOINT_VERSION
 USER 0
 RUN yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-${RHEL_ENDPOINT_VERSION}.x86_64.rpm \
     && yum -y install git-${GIT_VERSION} \
-    && yum -y install libgcc.i686 libgcc-c++.i686 glibc-devel.i686 libstdc++-devel.i686 --setopt=protected_multilib=false \
+    && yum -y install libgcc.i686-${GCC_VERSION} \
+    libgcc-c++.i686-${GCC_VERSION}   \
+    glibc-devel.i686-${GLIBC_VERSION} \
+    libstdc++-devel.i686-${GCC_VERSION} \
+    --setopt=protected_multilib=false \
     && yum clean all
 USER 1001
 

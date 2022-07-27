@@ -56,7 +56,7 @@ RUN yum -y install java-11-openjdk-devel-${JDK_VERSION} \
 # Scala & sbt
 RUN curl -fL https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz | gzip -d > cs \
     && chmod +x cs \
-    && ./cs setup
+    && ./cs setup --yes
 
 USER 1001
 

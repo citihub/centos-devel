@@ -60,10 +60,10 @@ RUN yum -y install java-11-openjdk-devel-${JDK_VERSION} \
     && yum clean all
 
 # Scala & sbt
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN curl -fL https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz | gzip -d > cs \
-    && chmod +x cs \
-    && ./cs setup --yes
+#SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+#RUN curl -fL https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz | gzip -d > cs \
+#    && chmod +x cs \
+#    && ./cs setup --yes
 
 USER 1001
 

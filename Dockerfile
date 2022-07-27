@@ -28,7 +28,7 @@ ARG WGET_VERSION
 USER 0
 
 # Tools
-RUN yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-${RHEL_ENDPOINT_VERSION}.x86_64.rpm \
+RUN yum -y install https://packages.endpointdev.com/rhel/7/os/x86_64/endpoint-repo-${RHEL_ENDPOINT_VERSION}.x86_64.rpm \
     && yum -y install git-${GIT_VERSION} \
     wget-${WGET_VERSION} \
     openssl-libs-${OPENSSL_VERSION} \

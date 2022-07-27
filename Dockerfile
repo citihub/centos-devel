@@ -54,11 +54,9 @@ RUN yum -y install java-11-openjdk-devel-${JDK_VERSION} \
     && yum clean all
 
 # Scala & sbt
-RUN curl -o scala-${SCALA_VERSION}.rpm https://downloads.lightbend.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.rpm \
-    && curl https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo \
-    && yum -y install scala-${SCALA_VERSION}.rpm sbt-${SBT_VERSION} \
-    && rm scala-${SCALA_VERSION}.rpm \
-    && yum clean all
+RUN curl -fL https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz | gzip -d > cs \
+    && chmod +x cs \
+    && ./cs setup
 
 USER 1001
 

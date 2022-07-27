@@ -9,14 +9,24 @@
   <a href="https://azure.microsoft.com"><img width="200" src="https://github.com/citihub/centos-devel/raw/master/resources/citihub_logo.png"></a>
 </p>
 
-# Citihub Development Docker image
+# Synechron Development Docker image
 
-## 💡Motivation
+## 💡 Motivation
 The goal is to create a **minimalist** and **lightweight** image with development tools in order to reduce network and storage impact.
 
 This image gives you the flexibility to be used for development or as a base image as you see fits.
 
 This image uses a non-root user with a UID and GID of 1001 to conform with docker security best practices.
+
+## :boom: Release
+
+- Push/Pull-Request to master
+  - triggers [push-latest](.github/workflows/push-latest.yml) action
+  - Builds container image and pushes to docker hub with latest image tag
+- Create a git tag, e.g. 1.5
+- Create a github release for tagged version with suitable title and description, e.g. Synechron v1.5
+  - Automatically triggers github [release](.github/workflows/release.yml) action
+  - Builds container image and pushes to docker hub with release-X.X image tag
 
 ## 🚀 Usage
 

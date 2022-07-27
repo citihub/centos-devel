@@ -7,6 +7,9 @@ ARG GLIBC_VERSION=2.17-323.el7_9
 ARG JDK_VERSION=11.0.10.0.9-1.el7_9
 ARG SCALA_VERSION=2.13.5
 ARG SBT_VERSION=1.4.9-0
+ARG OPENSSL_VERSION=1.0.2k-19.el7
+ARG OPENSSL11_VERSION=1.1.1k-4.el7
+ARG WGET_VERSION=1.14-18.el7_6.1
 
 # Download Terraform binary
 #FROM centos/devtoolset-7-toolchain-centos7:${CENTOS_VERSION} as base
@@ -18,13 +21,18 @@ ARG GLIBC_VERSION
 ARG JDK_VERSION
 ARG SCALA_VERSION
 ARG SBT_VERSION
+ARG OPENSSL_VERSION
+ARG OPENSSL11_VERSION
+ARG WGET_VERSION
 
 USER 0
 
 # Tools
 RUN yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-${RHEL_ENDPOINT_VERSION}.x86_64.rpm \
     && yum -y install git-${GIT_VERSION} \
-    && yum -y install wget-1.14-18.el7_6.1 \
+    wget-${WGET_VERSION} \
+    openssl-libs-${OPENSSL_VERSION} \
+    openssl11-libs-${OPENSSL11_VERSION} \
     && yum clean all
 
 # C/C++ 64bit & 32bit

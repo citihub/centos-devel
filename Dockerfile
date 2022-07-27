@@ -3,8 +3,8 @@ ARG CENTOS_VERSION=7
 ARG GIT_VERSION=2.30.1-1.ep7
 ARG RHEL_ENDPOINT_VERSION=1.10-1
 ARG GCC_VERSION=4.8.5-44.el7
-ARG GLIBC_VERSION=2.17-323.el7_9
-ARG JDK_VERSION=11.0.10.0.9-1.el7_9
+ARG GLIBC_VERSION=2.17-326.el7_9
+ARG JDK_VERSION=1:11.0.15.0.9-2.el7_9 
 ARG SCALA_VERSION=2.13.5
 ARG SBT_VERSION=1.4.9-0
 ARG OPENSSL_VERSION=1.0.2k-19.el7
@@ -37,15 +37,14 @@ RUN yum -y install https://packages.endpointdev.com/rhel/7/os/x86_64/endpoint-re
 
 # C/C++ 64bit & 32bit
 RUN yum -y group install "Development Tools" \
-    && yum -y install libgcc-${GCC_VERSION} \
-    libgcc-c++-${GCC_VERSION}   \
+    && yum -y install \
     glibc-devel-${GLIBC_VERSION} \
     libstdc++-devel-${GCC_VERSION} \
     --setopt=protected_multilib=false \
-    && yum -y install libgcc-${GCC_VERSION}.i686 \
-    libgcc-c++-${GCC_VERSION}.i686   \
+    && yum -y install \
     glibc-devel-${GLIBC_VERSION}.i686 \
     libstdc++-devel-${GCC_VERSION}.i686 \
+    libgcc-${GCC_VERSION}.i686 \
     --setopt=protected_multilib=false \
     && yum clean all
 

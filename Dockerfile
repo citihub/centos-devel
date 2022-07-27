@@ -66,8 +66,8 @@ RUN curl -fL https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux
 USER 1001
 
 # Build final image
-LABEL maintainer="support@citihub.com"
-LABEL Remarks="Citihub Centos 7 development build server (32bit/64bit/C/C++/Java/Scala/SBT)"
+LABEL maintainer="product-support@synechron.com"
+LABEL Remarks="Synechron Centos 7 development build server (32bit/64bit/C/C++/Java/Scala/SBT)"
 
 WORKDIR /workspace
 USER 0
